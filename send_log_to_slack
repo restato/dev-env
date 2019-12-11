@@ -1,0 +1,21 @@
+# -*- encoding: utf8 -*-
+import sys 
+
+def send_log_to_slack(text):
+    channel = 'noti'
+    import datetime
+    from slacker import Slacker
+    token = <token>
+    slack = Slacker(token)
+    attachments_dict = dict()
+    attachments_dict['pretext'] = text
+    #attachments_dict['title'] = ""
+    #attachments_dict['title_link'] = ""
+    attachments_dict['fallback'] = text # "1급 비밀 메시지"
+    #attachments_dict['text'] = text
+    #attachments_dict['mrkdwn_in'] = ["text", "pretext"]  # 마크다운을 적용시킬 인자들을 선택
+    attachments = [attachments_dict]
+    slack.chat.post_message(channel=channel, text=None, attachments=attachments, as_user=False)
+
+text = sys.argv[1]
+send_log_to_slack(text)
